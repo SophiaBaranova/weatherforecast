@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:weatherforecast"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid Margin="0,0,0,-322" Height="756" VerticalAlignment="Bottom">
+        Title="MainWindow"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Height="772"
+        Width="800">
+        <Grid Margin="0,0,0,0" Height="756" VerticalAlignment="Bottom">
         <Grid.Background>
             <ImageBrush ImageSource="/IMG_1799.JPG" Stretch="UniformToFill"/>
         </Grid.Background>
@@ -14,13 +18,13 @@
         <!-- Кнопка "Увійти" -->
         <Button Content="Увійти" 
                 HorizontalAlignment="Center" 
-                Margin="0,318,0,0" 
+                Margin="0,303,0,0" 
                 VerticalAlignment="Top" 
                 Background="#FFA6DBFF" 
                 FontSize="24" 
-                Height="60" 
+                Height="74" 
                 Width="250"
-                Foreground="#FF092039" FontWeight="Bold">
+                Foreground="#FF092039" FontWeight="Bold" Click="ButtonEnter_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}" 
@@ -33,16 +37,16 @@
             </Button.Template>
         </Button>
 
-        <!-- Кнопка "Реєстрація" -->
+        <!-- Кнопка "Зареєструватися" -->
         <Button Content="Зареєструватися" 
                 HorizontalAlignment="Center" 
                 Margin="0,416,0,0" 
                 VerticalAlignment="Top" 
                 Background="#FFA6DBFF" 
                 FontSize="24" 
-                Height="60" 
+                Height="74" 
                 Width="250" 
-                Foreground="#FF092039" FontWeight="Bold">
+                Foreground="#FF092039" FontWeight="Bold" Click="ButtonRegister_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}" 
@@ -54,7 +58,9 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Label Content="Вітаю!" 
+
+        <!-- Напис "Вітаємо!" -->
+        <Label Content="Вітаємо!" 
                HorizontalAlignment="Center" 
                VerticalAlignment="Top" 
                Margin="0,181,0,0" 

@@ -14,14 +14,31 @@ using System.Windows.Shapes;
 
 namespace weatherforecast
 {
-    /// <summary>
-    /// Interaction logic for Greeting.xaml
-    /// </summary>
     public partial class Greeting : Window
     {
         public Greeting()
         {
             InitializeComponent();
+        }
+
+        // Кнопка "Увійти"
+        private void ButtonEnter_Click(object sender, RoutedEventArgs e)
+        {
+            Authorization authWindow = new Authorization();
+            authWindow.Show();
+        }
+
+        // Кнопка "Зареєструватися"
+        private void ButtonRegister_Click(object sender, RoutedEventArgs e)
+        {
+            Registration regWindow = new Registration();
+            regWindow.ShowDialog();
+            if (regWindow.DialogResult == true)
+            {
+                // Якщо реєстрація пройшла успішно, перехід на вікно авторизації
+                Authorization authWindow = new Authorization();
+                authWindow.Show();
+            }
         }
     }
 }

@@ -1,0 +1,144 @@
+﻿<Window x:Class="weatherforecast.ChooseRegion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:weatherforecast"
+        mc:Ignorable="d"
+        Title="ChooseRegion"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Height="772"
+        Width="800">
+    <Grid Margin="0,0,0,0" Background="#FF224F75">
+
+        <!-- Напис "Обрати регіон" -->
+        <Label Content="Обрати регіон" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Top" 
+               Margin="0,48,0,0" 
+               FontSize="32" 
+               FontWeight="Bold" 
+               Foreground="White"/>
+
+        <!-- Лейбли полів введення -->
+        <Label Content="Оберіть країну"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="200,129,0,0"
+               FontSize="16"
+               Foreground="White"/>
+        <Label Content="Поле не обов'язкове"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="200,369,0,0"
+               FontSize="16"
+               Foreground="White"/>
+        <Label Content="Оберіть місто"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="200,249,0,0"
+               FontSize="16"
+               Foreground="White"/>
+
+
+        <!-- Поля для введення -->
+        <Border x:Name="Border1" Background="#FFD5DDE2" 
+                CornerRadius="20" 
+                Height="60" 
+                Width="416"
+                Margin="0,160,0,0" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top">
+            <TextBox x:Name="TextBox1" 
+                Background="Transparent" 
+                BorderThickness="0" 
+                FontSize="18" 
+                Foreground="#FF092039" 
+                Text="Оберіть країну"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                Margin="23,0,23,0" MouseDoubleClick="TextBox1_MouseDC"/>
+        </Border>
+        <Border x:Name="Border2" Background="#FFD5DDE2" 
+                CornerRadius="20" 
+                Height="60" 
+                Width="416"
+                Margin="0,280,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top">
+            <TextBox x:Name="TextBox2" 
+                Background="Transparent" 
+                BorderThickness="0" 
+                FontSize="18" 
+                Foreground="#FF092039" 
+                Text="Оберіть місто"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                     Margin="23,0,23,0" Height="60" VerticalAlignment="Top" MouseDoubleClick="TextBox2_MouseDC"/>
+        </Border>
+
+        <!-- Запам'ятати регіон -->
+        <Border Background="#FF5CE1E6" 
+                CornerRadius="20" 
+                Height="60" 
+                Width="416"
+                Margin="0,400,0,0" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top">
+            <TextBox 
+                Background="Transparent" 
+                BorderThickness="0" 
+                FontSize="18" 
+                Foreground="#FF092039" 
+                Text="Запам'ятати регіон"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                Margin="23,0,235,0"/>
+        </Border>
+        <CheckBox x:Name="CheckBox1" Content="" HorizontalAlignment="Left" Margin="568,425,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.262,-1.029" Height="16" Width="34">
+            <CheckBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.698"/>
+                    <TranslateTransform X="-0.298" Y="0.101"/>
+                </TransformGroup>
+            </CheckBox.RenderTransform>
+        </CheckBox>
+
+        <!-- Кнопка "ОК" -->
+        <Button Content="ОК"
+                Background="#FFA6DBFF"
+                FontSize="18"
+                Height="74"
+                Width="128"
+                Foreground="#FF092039"
+                Margin="0,604,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top" Click="ButtonOK_Click" FontWeight="Bold">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="30"
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Кнопка "Назад" -->
+        <Button Content="Назад"
+                HorizontalAlignment="Left"
+                Margin="60,690,0,0"
+                VerticalAlignment="Top"
+                Click="ButtonBack_Click"
+                Background="{x:Null}"
+                BorderBrush="{x:Null}"
+                Foreground="White"
+                FontSize="16"/>
+
+    </Grid>
+</Window>

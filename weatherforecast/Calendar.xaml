@@ -1,0 +1,861 @@
+﻿<Window x:Class="weatherforecast.Calendar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:weatherforecast"
+        mc:Ignorable="d"
+        Title="Calendar"
+        WindowStartupLocation="CenterScreen"
+        Height="772"
+        Width="800">
+    <Grid Margin="0,0,0,0" Background="#FF224F75">
+
+        <!-- Кнопки - позначення днів -->
+             <Button x:Name="DayBut1" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="57,93,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day1" FontWeight="Bold" RenderTransformOrigin="1.081,0.452" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="20" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="DayBut2" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="163,93,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day2" FontWeight="Bold" RenderTransformOrigin="1.081,0.452" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="20" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="DayBut3" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="265,93,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day3" FontWeight="Bold" RenderTransformOrigin="1.081,0.452" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="20" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="DayBut4" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="369,93,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day4" FontWeight="Bold" RenderTransformOrigin="1.081,0.452" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="20" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="DayBut5" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="473,93,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day5" FontWeight="Bold" RenderTransformOrigin="1.081,0.452" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="20" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="DayBut6" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="575,93,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day6" FontWeight="Bold" RenderTransformOrigin="1.081,0.452" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="20" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="DayBut7" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="675,93,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day7" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="20" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="DayBut8" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="57,173,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day8" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut9" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="163,173,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day9" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut10" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="265,173,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day10" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut11" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="369,173,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day11" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut12" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="473,173,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day12" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut13" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="575,173,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day13" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut14" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="71" 
+            Margin="676,173,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day14" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="DayBut15" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="57,249,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day15" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut16" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="163,249,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day16" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut17" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="265,249,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day17" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut18" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="369,249,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day18" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut19" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="473,249,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day19" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut20" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="575,249,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day20" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut21" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="71" 
+            Margin="676,249,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day21" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="DayBut22" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="57,327,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day22" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut23" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="163,327,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day23" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut24" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="265,327,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day24" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut25" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="369,327,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day25" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut26" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="473,327,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day26" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut27" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="575,327,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day27" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut28" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="675,327,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day28" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="DayBut29" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="57,409,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day29" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut30" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="163,409,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day30" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut31" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="265,409,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day31" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut32" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="369,409,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day32" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut33" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="473,409,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day33" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut34" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="575,409,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day34" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut35" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="675,409,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day35" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>        
+
+        <Button x:Name="DayBut36" Content="" 
+            FontSize="18" 
+            Height="60" 
+            Width="72" 
+            Margin="57,491,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Click="Day36" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="20                             " 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut37" Content="" 
+           FontSize="18" 
+           Height="60" 
+           Width="72" 
+           Margin="163,491,0,0" 
+           HorizontalAlignment="Left" 
+           VerticalAlignment="Top" Click="Day37" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                       CornerRadius="20                             " 
+                       BorderBrush="{TemplateBinding BorderBrush}" 
+                       BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut38" Content="" 
+           FontSize="18" 
+           Height="60" 
+           Width="72" 
+           Margin="265,491,0,0" 
+           HorizontalAlignment="Left" 
+           VerticalAlignment="Top" Click="Day38" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                       CornerRadius="20                             " 
+                       BorderBrush="{TemplateBinding BorderBrush}" 
+                       BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut39" Content="" 
+           FontSize="18" 
+           Height="60" 
+           Width="72" 
+           Margin="369,491,0,0" 
+           HorizontalAlignment="Left" 
+           VerticalAlignment="Top" Click="Day39" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                       CornerRadius="20                             " 
+                       BorderBrush="{TemplateBinding BorderBrush}" 
+                       BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut40" Content="" 
+           FontSize="18" 
+           Height="60" 
+           Width="72" 
+           Margin="473,491,0,0" 
+           HorizontalAlignment="Left" 
+           VerticalAlignment="Top" Click="Day40" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                       CornerRadius="20                             " 
+                       BorderBrush="{TemplateBinding BorderBrush}" 
+                       BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut41" Content="" 
+           FontSize="18" 
+           Height="60" 
+           Width="72" 
+           Margin="575,491,0,0" 
+           HorizontalAlignment="Left" 
+           VerticalAlignment="Top" Click="Day41" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                       CornerRadius="20                             " 
+                       BorderBrush="{TemplateBinding BorderBrush}" 
+                       BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DayBut42" Content="" 
+           FontSize="18" 
+           Height="60" 
+           Width="72" 
+           Margin="675,491,0,0" 
+           HorizontalAlignment="Left" 
+           VerticalAlignment="Top" Click="Day42" FontWeight="Bold" BorderBrush="#FF511313" Foreground="#FFFFDBDB" Background="#FF6496A2">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" 
+                       CornerRadius="20                             " 
+                       BorderBrush="{TemplateBinding BorderBrush}" 
+                       BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Кнопка "Завантажити" -->
+        <Button Content="З" 
+                Background="#FFA6DBFF" 
+                FontSize="18" 
+                Height="60" 
+                Width="71" 
+                Foreground="#FF092039" 
+                Margin="675,604,0,0" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" Click="ButtonDownload_Click" FontWeight="Bold">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="30" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Кнопка "Калькулятор" -->
+        <Button Content="К" 
+         Background="#FFA6DBFF" 
+         FontSize="18" 
+         Height="60" 
+         Width="71" 
+         Foreground="#FF092039" 
+         Margin="575,604,0,0" 
+         HorizontalAlignment="Left" 
+         VerticalAlignment="Top" Click="ButtonCalculate_Click" FontWeight="Bold">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" 
+                     CornerRadius="30" 
+                     BorderBrush="{TemplateBinding BorderBrush}" 
+                     BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        
+        <!-- Кнопка "Фільтр" -->
+        <Button Content="Ф" 
+         Background="#FFA6DBFF" 
+         FontSize="18" 
+         Height="60" 
+         Width="72" 
+         Foreground="#FF092039" 
+         Margin="472,604,0,0" 
+         HorizontalAlignment="Left" 
+         VerticalAlignment="Top" Click="ButtonFilter_click" FontWeight="Bold">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" 
+                     CornerRadius="30" 
+                     BorderBrush="{TemplateBinding BorderBrush}" 
+                     BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        
+        <!-- Кнопка "Назад" -->
+        <Button Content="Назад"
+                HorizontalAlignment="Left"
+                Margin="60,690,0,0"
+                VerticalAlignment="Top"
+                Click="ButtonBack_Click"
+                Background="{x:Null}"
+                BorderBrush="{x:Null}"
+                Foreground="White"
+                FontSize="16"/>
+
+    </Grid>
+</Window>
