@@ -61,7 +61,7 @@ namespace weatherforecast
             if (result == MessageBoxResult.Yes)
             {
                 // Перевірка з'єднання з БД
-                if (!Registration.Connect(connectionString))
+                if (!ValidationService.Connect(connectionString))
                 {
                     return;
                 }
@@ -74,14 +74,14 @@ namespace weatherforecast
 
                         // Видалення запису із БД
                         string deleteQuery = "DELETE FROM weatherdata WHERE id = @ID";
-                        using (MySqlCommand command = new MySqlCommand(deleteQuery, connection))
+                        using (MySqlCommand cmd = new MySqlCommand(deleteQuery, connection))
                         {
-                            command.Parameters.AddWithValue("@ID", entryId);
-                            command.ExecuteNonQuery();
+                            cmd.Parameters.AddWithValue("@ID", entryId);
+                            cmd.ExecuteNonQuery();
                         }
                     }
                     
-                    Registration.ShowMessage("Запис успішно видалено", "Успіх", MessageBoxImage.Information);
+                    ValidationService.ShowMessage("Запис успішно видалено", "Успіх", MessageBoxImage.Information);
                     this.DialogResult = true;
                     this.Close();
                 }
@@ -89,7 +89,7 @@ namespace weatherforecast
                 // Обробка помилок
                 catch (Exception ex)
                 {
-                    Registration.ShowMessage("Помилка при видаленні: " + ex.Message, "Помилка", MessageBoxImage.Error);
+                    ValidationService.ShowMessage("Помилка при видаленні: " + ex.Message, "Помилка", MessageBoxImage.Error);
                     this.DialogResult = false;
                     this.Close();
                 }
@@ -115,18 +115,17 @@ namespace weatherforecast
         {
             try
             {
-                Add aW = new Add(UpdatedData.Country, UpdatedData.City);
                 Border[] borders = { Border1, Border2, Border3, Border4, Border5, Border6, Border7 };
 
                 // Перевірка коректності заповнення полів
-                if (!aW.CheckValid(out string validationError, borders))
+                if (!ValidationService.CheckValid(out string errorMessage, borders))
                 {
-                    Registration.ShowMessage(validationError, "Помилка", MessageBoxImage.Error);
+                    ValidationService.ShowMessage(errorMessage, "Помилка", MessageBoxImage.Error);
                     return;
                 }
 
                 // Перевірка з'єднання з БД
-                if (!Registration.Connect(connectionString))
+                if (!ValidationService.Connect(connectionString))
                 {
                     return;
                 }
@@ -137,15 +136,15 @@ namespace weatherforecast
                     connection.Open();
 
                     string checkQuery = "SELECT COUNT(*) FROM weatherdata WHERE id = @ID";
-                    using (MySqlCommand command = new MySqlCommand(checkQuery, connection))
+                    using (MySqlCommand cmd = new MySqlCommand(checkQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@ID", entryId);
-                        int recordCount = Convert.ToInt32(command.ExecuteScalar());
+                        cmd.Parameters.AddWithValue("@ID", entryId);
+                        int recordCount = Convert.ToInt32(cmd.ExecuteScalar());
 
                         // Якщо запису не існує
                         if (recordCount == 0)
                         {
-                            Registration.ShowMessage("Запис не знайдено", "Помилка", MessageBoxImage.Error);
+                            ValidationService.ShowMessage("Запис не знайдено", "Помилка", MessageBoxImage.Error);
                             this.DialogResult = false;
                             this.Close();
                         }
@@ -167,21 +166,21 @@ namespace weatherforecast
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    using (MySqlCommand command = new MySqlCommand(updateQuery, connection))
+                    using (MySqlCommand cmd = new MySqlCommand(updateQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@ID", UpdatedData.ID);
-                        command.Parameters.AddWithValue("@Temperature", UpdatedData.Temperature);
-                        command.Parameters.AddWithValue("@PrecipitationVal", UpdatedData.PrecipitationVal);
-                        command.Parameters.AddWithValue("@Humidity", UpdatedData.Humidity);
-                        command.Parameters.AddWithValue("@Pressure", UpdatedData.Pressure);
-                        command.Parameters.AddWithValue("@WindSpeed", UpdatedData.WindSpeed);
-                        command.Parameters.AddWithValue("@Precipitation", UpdatedData.Precipitation);
-                        command.Parameters.AddWithValue("@Wind", UpdatedData.Wind);
-                        command.ExecuteNonQuery();
+                        cmd.Parameters.AddWithValue("@ID", UpdatedData.ID);
+                        cmd.Parameters.AddWithValue("@Temperature", UpdatedData.Temperature);
+                        cmd.Parameters.AddWithValue("@PrecipitationVal", UpdatedData.PrecipitationVal);
+                        cmd.Parameters.AddWithValue("@Humidity", UpdatedData.Humidity);
+                        cmd.Parameters.AddWithValue("@Pressure", UpdatedData.Pressure);
+                        cmd.Parameters.AddWithValue("@WindSpeed", UpdatedData.WindSpeed);
+                        cmd.Parameters.AddWithValue("@Precipitation", UpdatedData.Precipitation);
+                        cmd.Parameters.AddWithValue("@Wind", UpdatedData.Wind);
+                        cmd.ExecuteNonQuery();
                     }
                 }
 
-                Registration.ShowMessage("Дані успішно оновлено", "Успіх", MessageBoxImage.Information);
+                ValidationService.ShowMessage("Дані успішно оновлено", "Успіх", MessageBoxImage.Information);
                 this.DialogResult = true;
                 this.Close();
             }
@@ -189,7 +188,7 @@ namespace weatherforecast
             // Обробка помилок
             catch (Exception ex)
             {
-                Registration.ShowMessage("Помилка при збереженні: " + ex.Message, "Помилка", MessageBoxImage.Error);
+                ValidationService.ShowMessage("Помилка при збереженні: " + ex.Message, "Помилка", MessageBoxImage.Error);
                 return;
             }
         }

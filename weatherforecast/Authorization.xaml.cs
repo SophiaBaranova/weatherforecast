@@ -31,10 +31,9 @@ namespace weatherforecast
             Border[] borders = { Border1, Border2 };
 
             // Перевірка заповнення полів
-            Registration regWindow = new Registration();
-            if (!regWindow.CheckValid(borders))
+            if (!ValidationService.CheckNotEmpty(borders))
             {
-                Registration.ShowMessage("Будь ласка, заповніть всі поля", "Помилка", MessageBoxImage.Error);
+                ValidationService.ShowMessage("Будь ласка, заповніть всі поля", "Помилка", MessageBoxImage.Error);
                 return;
             }
 
@@ -48,7 +47,7 @@ namespace weatherforecast
             string connectionString = ConfigurationManager.ConnectionStrings["WeatherDb"].ConnectionString;
 
             // Перевірка з'єднання з БД
-            if (!Registration.Connect(connectionString))
+            if (!ValidationService.Connect(connectionString))
             {
                 return;
             }
@@ -58,9 +57,9 @@ namespace weatherforecast
                 connection.Open();
 
                 // Перевірка наявності облікового запису
-                string query = "SELECT * FROM authodata WHERE login = @Login AND password = @Password";
+                string checkQuery = "SELECT * FROM authodata WHERE login = @Login AND password = @Password";
 
-                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                using (MySqlCommand cmd = new MySqlCommand(checkQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@Login", user.Login);
                     cmd.Parameters.AddWithValue("@Password", user.Password);
@@ -69,7 +68,7 @@ namespace weatherforecast
                     {
                         if (reader.Read())
                         {
-                            Registration.ShowMessage("Вхід успішний!", "Успіх", MessageBoxImage.Information);
+                            ValidationService.ShowMessage("Вхід успішний!", "Успіх", MessageBoxImage.Information);
 
                             // Визначення ролі користувача
                             user.Admin = reader.GetBoolean("admin");
@@ -80,7 +79,7 @@ namespace weatherforecast
                         }
                         else
                         {
-                            Registration.ShowMessage("Обліковий запис не знайдено", "Помилка", MessageBoxImage.Error);
+                            ValidationService.ShowMessage("Обліковий запис не знайдено", "Помилка", MessageBoxImage.Error);
                             return;
                         }
                     }

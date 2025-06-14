@@ -48,13 +48,14 @@ namespace weatherforecast
             LoadWeatherData();
         }
 
+        // Завантаження даних з БД
         private void LoadWeatherData()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["WeatherDb"].ConnectionString;
             initialList = new List<WeatherData>();
 
             // Перевірка з'єднання з БД
-            if (!Registration.Connect(connectionString))
+            if (!ValidationService.Connect(connectionString))
             {
                 this.Close();
                 return;
@@ -64,21 +65,15 @@ namespace weatherforecast
             {
                 connection.Open();
 
-                // Перевірка наявності таблиці
-                string checkQuery = "SHOW TABLES LIKE 'weatherdata';";
-                using (MySqlCommand cmdCheck = new MySqlCommand(checkQuery, connection))
-                using (MySqlDataReader readerCheck = cmdCheck.ExecuteReader())
+                // Перевірка наявності таблиці weatherdata
+                if (!ValidationService.CheckTableExists(connection, "weatherdata"))
                 {
-                    if (!readerCheck.Read())
-                    {
-                        Registration.ShowMessage("Таблиця БД не існує", "Помилка", MessageBoxImage.Error);
-                        this.Close();
-                    }
+                    this.Close();
                 }
 
-                // Перевірка наявності записів по обраному регіону за обраний період у таблиці
-                string query = "SELECT * FROM weatherdata WHERE country = @country AND city = @city AND date BETWEEN @startDate AND @endDate ORDER BY date ASC";
-                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                // Отримання записів по обраному регіону за обраний період з таблиці
+                string getDataQuery = "SELECT * FROM weatherdata WHERE country = @country AND city = @city AND date BETWEEN @startDate AND @endDate ORDER BY date ASC";
+                using (MySqlCommand cmd = new MySqlCommand(getDataQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@country", country);
                     cmd.Parameters.AddWithValue("@city", city);
@@ -89,7 +84,7 @@ namespace weatherforecast
                     {
                         if (!reader.HasRows)
                         {
-                            Registration.ShowMessage("Таблиця існує, але не містить записів по обраному регіону за обраний період", "Помилка", MessageBoxImage.Error);
+                            ValidationService.ShowMessage("Записів по обраному регіону за обраний період не знайдено", "Помилка", MessageBoxImage.Error);
                             this.Close();
                         }
 
@@ -219,17 +214,19 @@ namespace weatherforecast
             calcWindow.ShowDialog();
         }
 
+        // Кнопка "Завантажити"
         private void ButtonDownload_Click(object sender, RoutedEventArgs e)
         {
             // Перевірка наявності даних
             if (currentList == null || currentList.Count == 0)
             {
-                Registration.ShowMessage("Немає даних для збереження", "Помилка", MessageBoxImage.Warning);
+                ValidationService.ShowMessage("Немає даних для збереження", "Помилка", MessageBoxImage.Warning);
                 return;
             }
 
             try
             {
+                // Створення нового документа Word
                 var wordApp = new Word.Application();
                 wordApp.Visible = false;
                 var document = wordApp.Documents.Add();
@@ -313,7 +310,7 @@ namespace weatherforecast
                 $"{calcWindow.AverageRain:F1} %",
                 $"{calcWindow.AverageSnow:F1} %",
                 $"{calcWindow.AverageHail:F1} %"
-            };
+                    };
 
                     // Заповнення таблиці
                     for (int i = 0; i < 6; i++)
@@ -326,6 +323,7 @@ namespace weatherforecast
                 // Збереження документа
                 Microsoft.Win32.SaveFileDialog saveDialog = new Microsoft.Win32.SaveFileDialog
                 {
+                    FileName = "Звіт_" + DateTime.Now.ToString("dd/MM/yyyy"),
                     Filter = "Word Documents|*.docx",
                     Title = "Зберегти звіт"
                 };
@@ -333,15 +331,21 @@ namespace weatherforecast
                 if (saveDialog.ShowDialog() == true)
                 {
                     document.SaveAs2(saveDialog.FileName);
-                    Registration.ShowMessage("Документ збережено успішно", "Успіх", MessageBoxImage.Information);
+                    ValidationService.ShowMessage("Документ збережено успішно", "Успіх", MessageBoxImage.Information);
+                }
+                else
+                {
+                    return; // Якщо користувач скасував збереження, вихід із методу
                 }
 
                 document.Close();
                 wordApp.Quit();
             }
+
+            // Обробка помилок
             catch (Exception ex)
             {
-                Registration.ShowMessage("Помилка при збереженні: " + ex.Message, "Помилка", MessageBoxImage.Error);
+                ValidationService.ShowMessage("Помилка при збереженні: " + ex.Message, "Помилка", MessageBoxImage.Error);
             }
         }
 

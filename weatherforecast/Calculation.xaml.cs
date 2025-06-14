@@ -20,10 +20,11 @@ namespace weatherforecast
         public Calculation(List<WeatherData> currentList)
         {
             InitializeComponent();
+
             // Перевірка наявності даних
             if (currentList == null || currentList.Count == 0)
             {
-                Registration.ShowMessage("Список даних порожній", "Помилка", MessageBoxImage.Error);
+                ValidationService.ShowMessage("Список даних порожній", "Помилка", MessageBoxImage.Error);
                 this.Close();
                 return;
             }
@@ -37,7 +38,7 @@ namespace weatherforecast
         public double AverageHail { get; private set; }
         public bool IsCalculated { get; set; } = false;
 
-
+        // Метод для обчислення середніх значень
         public void Calculate(List<WeatherData> currentList)
         {
             // Обчислення середньої температури, вологості, тиску
