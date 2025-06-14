@@ -12,7 +12,7 @@
         Width="800">
         <Grid Margin="0,0,0,0" Height="756" VerticalAlignment="Bottom">
         <Grid.Background>
-            <ImageBrush ImageSource="/IMG_1799.JPG" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="\Images\background.JPG" Stretch="UniformToFill"/>
         </Grid.Background>
 
         <!-- Кнопка "Увійти" -->
