@@ -287,7 +287,7 @@ namespace weatherforecast
 
                     // Заголовок таблиці з розрахунками
                     Word.Paragraph title2 = document.Content.Paragraphs.Add();
-                    title2.Range.Text = "Розрахунок середньомісячних показників";
+                    title2.Range.Text = "Розрахунок середніх значень показників";
                     title2.Range.Font.Name = "Times New Roman";
                     title2.Range.Font.Bold = 1;
                     title2.Range.Font.Size = 16;
