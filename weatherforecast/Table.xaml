@@ -36,15 +36,14 @@
         </ComboBox>
 
         <!-- Кнопка "Додати" -->
-        <Button Content="Д" 
-         Background="#FFA6DBFF" 
-         FontSize="18" 
+        <Button
+         Background="#FFA6DBFF"
          Height="60" 
-         Width="72" 
-         Foreground="#FF092039" 
+         Width="72"
          Margin="675,300,0,0" 
          HorizontalAlignment="Left" 
-         VerticalAlignment="Top" Click="ButtonAdd_Click" FontWeight="Bold" BorderBrush="#FF707070">
+         VerticalAlignment="Top" Click="ButtonAdd_Click" BorderBrush="#FF707070">
+            <Image Source="/Images/plus.png" Width="48" Height="48"/>
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}" 
@@ -58,15 +57,14 @@
         </Button>
 
         <!-- Кнопка "Редагувати" -->
-        <Button Content="Р" 
+        <Button
                 Background="#FFA6DBFF" 
-                FontSize="18" 
                 Height="60" 
                 Width="71" 
-                Foreground="#FF092039" 
                 Margin="675,387,0,0" 
                 HorizontalAlignment="Left" 
-                VerticalAlignment="Top" Click="ButtonEdit_Click" FontWeight="Bold" BorderBrush="#FF707070">
+                VerticalAlignment="Top" Click="ButtonEdit_Click" BorderBrush="#FF707070">
+            <Image Source="/Images/edit.png" Width="32" Height="32"/>
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}" 
