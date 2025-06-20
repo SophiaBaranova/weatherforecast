@@ -26,7 +26,7 @@ namespace weatherforecast
         private void LoadSavedRegion()
         {
             // Перевірка з'єднання з БД
-            if (!Registration.Connect(connectionString))
+            if (!ValidationService.Connect(connectionString))
             {
                 return;
             }
@@ -37,9 +37,9 @@ namespace weatherforecast
                 {
                     connection.Open();
 
-                    string query = "SELECT savedCountry, savedCity FROM authodata WHERE login = @login";
+                    string getSavedRegionQuery = "SELECT savedCountry, savedCity FROM authodata WHERE login = @login";
 
-                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    using (MySqlCommand cmd = new MySqlCommand(getSavedRegionQuery, connection))
                     {
                         cmd.Parameters.AddWithValue("@login", user.Login);
                         using (MySqlDataReader reader = cmd.ExecuteReader())
@@ -57,10 +57,11 @@ namespace weatherforecast
                         }
                     }
                 }
+
                 // Обробка помилок
                 catch (Exception ex)
                 {
-                    Registration.ShowMessage("Помилка при завантаженні збереженого регіону: " + ex.Message, "Помилка", MessageBoxImage.Error);
+                    ValidationService.ShowMessage("Помилка при завантаженні збереженого регіону: " + ex.Message, "Помилка", MessageBoxImage.Error);
                     return;
                 }
             }
@@ -71,10 +72,9 @@ namespace weatherforecast
         {
             Border[] borders = { Border1, Border2 };
 
-            Registration regWindow = new Registration();
-            if (!regWindow.CheckValid(borders))
+            if (!ValidationService.CheckNotEmpty(borders))
             {
-                Registration.ShowMessage("Будь ласка, заповніть всі поля", "Помилка", MessageBoxImage.Error);
+                ValidationService.ShowMessage("Будь ласка, заповніть всі поля", "Помилка", MessageBoxImage.Error);
                 return;
             }
 
@@ -87,7 +87,7 @@ namespace weatherforecast
             if (remember)
             {
                 // Перевірка з'єднання з БД
-                if (!Registration.Connect(connectionString))
+                if (!ValidationService.Connect(connectionString))
                 {
                     return;
                 }
@@ -97,8 +97,8 @@ namespace weatherforecast
                     try
                     {
                         connection.Open();
-                        string query = "UPDATE authodata SET savedCountry = @country, savedCity = @city WHERE login = @login";
-                        using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                        string updateQuery = "UPDATE authodata SET savedCountry = @country, savedCity = @city WHERE login = @login";
+                        using (MySqlCommand cmd = new MySqlCommand(updateQuery, connection))
                         {
                             cmd.Parameters.AddWithValue("@country", country);
                             cmd.Parameters.AddWithValue("@city", city);
@@ -106,22 +106,23 @@ namespace weatherforecast
                             cmd.ExecuteNonQuery();
                         }
                     }
+
                     // Обробка помилок
                     catch (Exception ex)
                     {
-                        Registration.ShowMessage("Помилка при збереженні регіону: " + ex.Message, "Помилка", MessageBoxImage.Error);
+                        ValidationService.ShowMessage("Помилка при збереженні регіону: " + ex.Message, "Помилка", MessageBoxImage.Error);
                         return;
                     }
                 }
             }
 
-            if (user.Admin == true)
+            if (user.Admin == true) // Якщо користувач є адміністратором
             {
                 // Перехід на вікно таблиці
                 Table tableWindow = new Table(country, city);
                 tableWindow.Show();
             }
-            else
+            else // Якщо користувач є клієнтом
             {
                 // Перехід на вікно вибору дат
                 SearchParam searchWindow = new SearchParam();
@@ -139,7 +140,6 @@ namespace weatherforecast
         // Кнопка "Назад"
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
         {
-
             this.Close();
         }
 

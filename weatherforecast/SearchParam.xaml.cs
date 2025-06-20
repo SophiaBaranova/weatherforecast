@@ -20,44 +20,50 @@ namespace weatherforecast
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
             Border[] borders = { Border1, Border2 };
+            string errorMessage = "";
+            bool isValid = true;
 
             // Перевірка заповнення полів
-            Registration regWindow = new Registration();
-            if (!regWindow.CheckValid(borders))
+            if (!ValidationService.CheckNotEmpty(borders))
             {
-                Registration.ShowMessage("Будь ласка, заповніть всі поля", "Помилка", MessageBoxImage.Error);
+                ValidationService.ShowMessage("Будь ласка, заповніть всі поля", "Помилка", MessageBoxImage.Error);
                 return;
             }
 
             string startText = TextBox1.Text.Trim();
             string endText = TextBox2.Text.Trim();
 
-            DateTime startDate, endDate;
+            DateTime startDate = DateTime.MinValue, endDate = DateTime.MinValue;
             string format = "yyyy-MM-dd";
 
             // Перевірка коректності дати
-            if (!DateTime.TryParseExact(startText, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate))
+            if (!DateTime.TryParseExact(startText, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate)
+                || !DateTime.TryParseExact(endText, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out endDate))
             {
-                Registration.ShowMessage("Невірний формат дати початку. Використовуйте формат РРРР-ММ-ДД", "Помилка", MessageBoxImage.Error);
-                return;
-            }
-            if (!DateTime.TryParseExact(endText, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out endDate))
-            {
-                Registration.ShowMessage("Невірний формат дати завершення. Використовуйте формат РРРР-ММ-ДД", "Помилка", MessageBoxImage.Error);
-                return;
+                errorMessage = "Невірний формат дати. Використовуйте формат РРРР-ММ-ДД";
+                isValid = false;
             }
 
-            if (endDate < startDate)
+            else if (endDate < startDate)
             {
-                Registration.ShowMessage("Дата завершення не може бути раніше дати початку", "Помилка", MessageBoxImage.Error);
-                return;
+                errorMessage = "Дата завершення не може бути раніше дати початку";
+                isValid = false;
             }
 
-            // Перевірка на максимальний проміжок (42 дні)
-            TimeSpan interval = endDate - startDate;
-            if (interval.TotalDays > 42)
+            else
             {
-                Registration.ShowMessage("Вибраний проміжок не може бути більше 42 днів", "Попередження", MessageBoxImage.Warning);
+                // Перевірка на максимальний проміжок (42 дні)
+                TimeSpan interval = endDate - startDate;
+                if (interval.TotalDays > 42)
+                {
+                    errorMessage = "Вибраний проміжок не може бути більше 42 днів";
+                    isValid = false;
+                }
+            }
+
+            if (!isValid)
+            {
+                ValidationService.ShowMessage(errorMessage, "Помилка", MessageBoxImage.Error);
                 return;
             }
 

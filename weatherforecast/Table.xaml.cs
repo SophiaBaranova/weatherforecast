@@ -21,6 +21,7 @@ namespace weatherforecast
     {
         private string country, city;
         private List<WeatherData> weatherList;
+
         public Table(string country, string city)
         {
             InitializeComponent();
@@ -32,14 +33,14 @@ namespace weatherforecast
             LoadWeatherData();
         }
 
-
+        // Завантаження даних з БД
         private void LoadWeatherData()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["WeatherDb"].ConnectionString;
             weatherList = new List<WeatherData>();
 
             // Перевірка з'єднання з БД
-            if (!Registration.Connect(connectionString))
+            if (!ValidationService.Connect(connectionString))
             {
                 this.Close();
                 return;
@@ -49,28 +50,15 @@ namespace weatherforecast
             {
                 connection.Open();
 
-                // Перевірка з'єднання
-                if (connection.State != System.Data.ConnectionState.Open)
+                // Перевірка наявності таблиці weatherdata
+                if (!ValidationService.CheckTableExists(connection, "weatherdata"))
                 {
-                    Registration.ShowMessage("Перевірте з'єднання", "Помилка", MessageBoxImage.Error);
                     this.Close();
                 }
 
-                // Перевірка наявності таблиці
-                string checkQuery = "SHOW TABLES LIKE 'weatherdata';";
-                using (MySqlCommand cmdCheck = new MySqlCommand(checkQuery, connection))
-                using (MySqlDataReader readerCheck = cmdCheck.ExecuteReader())
-                {
-                    if (!readerCheck.Read())
-                    {
-                        Registration.ShowMessage("Таблиця БД не існує", "Помилка", MessageBoxImage.Error);
-                        this.Close();
-                    }
-                }
-
-                // Отримання записів за регіоном з таблиці
-                string query = "SELECT * FROM weatherdata WHERE country = @country AND city = @city";
-                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                // Отримання записів по обраному регіону з таблиці
+                string getDataQuery = "SELECT * FROM weatherdata WHERE country = @country AND city = @city";
+                using (MySqlCommand cmd = new MySqlCommand(getDataQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@country", country);
                     cmd.Parameters.AddWithValue("@city", city);
@@ -80,12 +68,13 @@ namespace weatherforecast
                     {
                         if (!reader.HasRows)
                         {
-                            Registration.ShowMessage("Таблиця БД існує, але не містить записів по обраному регіону", "Помилка", MessageBoxImage.Error);
+                            ValidationService.ShowMessage("Записів по обраному регіону не знайдено", "Помилка", MessageBoxImage.Error);
                             this.Close();
                         }
 
                         while (reader.Read())
                         {
+                            // Додавання записів до списку
                             weatherList.Add(new WeatherData
                             {
                                 ID = Convert.ToInt32(reader["ID"]),
@@ -103,9 +92,13 @@ namespace weatherforecast
                         }
                     }
                 }
+
+                // Заповнення таблиці даними
                 TableWeather.ItemsSource = weatherList;
             }
         }
+
+        
 
         // Заповнення таблиці
         private void DG_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -200,7 +193,7 @@ namespace weatherforecast
 
             if (selectedItem == null)
             {
-                Registration.ShowMessage("Оберіть запис для редагування","Пояснення", MessageBoxImage.Warning);
+                ValidationService.ShowMessage("Оберіть запис для редагування", "Пояснення", MessageBoxImage.Warning);
                 return;
             }
 
@@ -220,20 +213,5 @@ namespace weatherforecast
         {
             this.Close();
         }
-    }
-
-    public class WeatherData
-    {
-        public int ID { get; set; }
-        public string Country { get; set; }
-        public string City { get; set; }
-        public string Date { get; set; }
-        public double Humidity { get; set; }
-        public string Precipitation { get; set; }
-        public double PrecipitationVal { get; set; }
-        public double Pressure { get; set; }
-        public double Temperature { get; set; }
-        public string Wind { get; set; }
-        public double WindSpeed { get; set; }
     }
 }

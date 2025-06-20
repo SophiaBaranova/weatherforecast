@@ -43,7 +43,7 @@ namespace weatherforecast
                 {
                     borders[i].BorderBrush = Brushes.Red;
                     borders[i].BorderThickness = new Thickness(4);
-                    Registration.ShowMessage("Будь ласка, заповніть всі поля", "Помилка", MessageBoxImage.Error);
+                    ValidationService.ShowMessage("Будь ласка, заповніть всі поля", "Помилка", MessageBoxImage.Error);
                     return;
                 }
             }
@@ -57,7 +57,7 @@ namespace weatherforecast
             {
                 Border3.BorderBrush = Brushes.Red;
                 Border3.BorderThickness = new Thickness(4);
-                Registration.ShowMessage("Будь ласка, оберіть тип опадів", "Помилка", MessageBoxImage.Error);
+                ValidationService.ShowMessage("Будь ласка, оберіть тип опадів", "Помилка", MessageBoxImage.Error);
                 return;
             }
 

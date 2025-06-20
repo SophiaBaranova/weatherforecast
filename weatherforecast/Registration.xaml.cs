@@ -16,64 +16,6 @@ namespace weatherforecast
             InitializeComponent();
         }
 
-        // Метод для перевірки підключення до бази даних
-        public static bool Connect(string connectionString)
-        {
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-                    return connection.State == System.Data.ConnectionState.Open;
-                }
-            }
-            catch (MySqlException ex)
-            {
-                Registration.ShowMessage("Помилка підключення до бази даних: " + ex.Message, "Помилка", MessageBoxImage.Error);
-                return false;
-            }
-            catch (Exception ex)
-            {
-                Registration.ShowMessage("Невідома помилка: " + ex.Message, "Помилка", MessageBoxImage.Error);
-                return false;
-            }
-        }
-
-        // Метод для перевірки коректності заповнення полів
-        public bool CheckValid(Border[] borders)
-        {
-            bool isValid = true;
-
-            foreach (var border in borders)
-                border.BorderThickness = new Thickness(0);
-
-            TextBox[] textBoxes = new TextBox[borders.Length];
-            for (int i = 0; i < textBoxes.Length; i++)
-            {
-                textBoxes[i] = (TextBox)borders[i].Child;
-            }
-
-            for (int i = 0; i < textBoxes.Length; i++)
-            {
-                string text = textBoxes[i].Text.Trim();
-                if (string.IsNullOrWhiteSpace(text))
-                {
-                    borders[i].BorderBrush = Brushes.Red;
-                    borders[i].BorderThickness = new Thickness(4);
-                    isValid = false;
-                }
-            }
-
-            return isValid;
-        }
-
-        // Метод для відображення повідомлення
-        public static void ShowMessage(string msg, string title, MessageBoxImage icon)
-        {
-            MessageBox.Show(msg, title, MessageBoxButton.OK, icon);
-            return;
-        }
-
         // Кнопка "Зареєструватися"
         private void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
@@ -81,7 +23,8 @@ namespace weatherforecast
             string errorMessage = "";
             bool isValid = true;
 
-            if (!CheckValid(borders))
+            // Перевірка заповнення полів
+            if (ValidationService.CheckNotEmpty(borders))
             {
                 errorMessage = "Будь ласка, заповніть всі поля";
                 isValid = false;
@@ -116,7 +59,7 @@ namespace weatherforecast
 
             if (!isValid)
             {
-                ShowMessage(errorMessage, "Помилка", MessageBoxImage.Error);
+                ValidationService.ShowMessage(errorMessage, "Помилка", MessageBoxImage.Error);
                 return;
             }
 
@@ -131,9 +74,8 @@ namespace weatherforecast
             string connectionString = ConfigurationManager.ConnectionStrings["WeatherDb"].ConnectionString;
 
             // Перевірка з'єднання з БД
-            if (!Connect(connectionString))
+            if (!ValidationService.Connect(connectionString))
             {
-                this.Close();
                 return;
             }
 
@@ -143,30 +85,30 @@ namespace weatherforecast
 
                 // Перевірка наявності логіна
                 string checkQuery = "SELECT COUNT(*) FROM authodata WHERE login = @Login";
-                using (MySqlCommand command = new MySqlCommand(checkQuery, connection))
+                using (MySqlCommand cmd = new MySqlCommand(checkQuery, connection))
                 {
-                    command.Parameters.AddWithValue("@Login", user.Login);
+                    cmd.Parameters.AddWithValue("@Login", user.Login);
 
-                    int count = Convert.ToInt32(command.ExecuteScalar());
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
 
                     if (count > 0)
                     {
-                        ShowMessage("Користувач з таким логіном вже існує", "Помилка", MessageBoxImage.Error);
+                        ValidationService.ShowMessage("Користувач з таким логіном вже існує", "Помилка", MessageBoxImage.Error);
                         return;
                     }
                 }
 
                 // Вставка нового користувача
                 string insertQuery = "INSERT INTO authodata (login, password) VALUES (@Login, @Password)";
-                using (MySqlCommand insertCommand = new MySqlCommand(insertQuery, connection))
+                using (MySqlCommand cmd = new MySqlCommand(insertQuery, connection))
                 {
-                    insertCommand.Parameters.AddWithValue("@Login", user.Login);
-                    insertCommand.Parameters.AddWithValue("@Password", user.Password);
+                    cmd.Parameters.AddWithValue("@Login", user.Login);
+                    cmd.Parameters.AddWithValue("@Password", user.Password);
 
                     try
                     {
-                        insertCommand.ExecuteNonQuery();
-                        ShowMessage("Реєстрація успішна!", "Успіх", MessageBoxImage.Information);
+                        cmd.ExecuteNonQuery();
+                        ValidationService.ShowMessage("Реєстрація успішна!", "Успіх", MessageBoxImage.Information);
                         this.DialogResult = true;
                         this.Close();
                     }
@@ -174,7 +116,8 @@ namespace weatherforecast
                     // Обробка помилок
                     catch (Exception ex)
                     {
-                        ShowMessage("Помилка при реєстрації: " + ex.Message, "Помилка", MessageBoxImage.Error);
+                        ValidationService.ShowMessage("Помилка при реєстрації: " + ex.Message, "Помилка", MessageBoxImage.Error);
+                        return;
                     }
                 }
             }
@@ -201,12 +144,5 @@ namespace weatherforecast
             TextBox3.Text = "";
         }
 
-    }
-
-    public class User
-    {
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public bool Admin { get; set; }
     }
 }
