@@ -9,13 +9,13 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize" 
         Height="772"
-        Width="800">
+        Width="1000">
     <Grid Margin="0,0,0,0" Background="#FF224F75">
 
         <!-- Випадний список для місяця -->
         <ComboBox x:Name="ComboBox1" Background="#d5dde2"
                   HorizontalAlignment="Left"
-                  Margin="535,60,0,0"
+                  Margin="735,60,0,0"
                   VerticalAlignment="Top"
                   FontSize="18"
                   Width="212"
@@ -40,7 +40,7 @@
          Background="#FFA6DBFF"
          Height="60" 
          Width="72"
-         Margin="675,300,0,0" 
+         Margin="875,300,0,0" 
          HorizontalAlignment="Left" 
          VerticalAlignment="Top" Click="ButtonAdd_Click" BorderBrush="#FF707070">
             <Image Source="/Images/plus.png" Width="48" Height="48"/>
@@ -61,7 +61,7 @@
                 Background="#FFA6DBFF" 
                 Height="60" 
                 Width="71" 
-                Margin="675,387,0,0" 
+                Margin="875,387,0,0" 
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" Click="ButtonEdit_Click" BorderBrush="#FF707070">
             <Image Source="/Images/edit.png" Width="32" Height="32"/>
@@ -90,10 +90,12 @@
 
         <DataGrid x:Name="TableWeather"
                 Margin="42,148,160,89"
+                HorizontalAlignment="Stretch"
                 AutoGenerateColumns="True"
                 AutoGeneratingColumn="DG_AutoGeneratingColumn"
                 Background="White"
                 Foreground="Black"
                 FontSize="14"/>
+
     </Grid>
 </Window>
